@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="es-PY">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffedae">
+  <meta name="description" content="¡Lucía cumple 6! Encontrá los detalles de la fiesta y confirmá tu asistencia.">
+  <title>¡Lucía cumple 6! · Fiesta de capibaras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #432d28;
+      --rose: #a02657;
+      --paper: #fff9e9;
+      --display: Fredoka, ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 1rem/1.55 "DM Sans", system-ui, sans-serif;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--display);
+      line-height: .98;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #56366b;
+      outline-offset: 5px;
+    }
+
+    .hero {
+      isolation: isolate;
+      position: relative;
+      overflow: hidden;
+      background-color: #ffedac;
+      background-image: linear-gradient(90deg, #f5c86145 50%, transparent 50%), linear-gradient(#f5c86145 50%, transparent 50%);
+      background-size: 64px 64px;
+      padding: clamp(76px, 10vw, 138px) 24px clamp(66px, 9vw, 110px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: auto 0 -1px;
+      height: 24px;
+      background: radial-gradient(circle at 16px 27px, var(--paper) 17px, transparent 18px) repeat-x;
+      background-size: 32px 28px;
+    }
+
+    .hero-inner {
+      max-width: 1080px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy>p:first-child {
+      font-weight: 700;
+      color: var(--rose);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+    }
+
+    h1 {
+      font-size: clamp(5rem, 12vw, 10.5rem);
+      letter-spacing: -.055em;
+      margin: .07em 0 .18em;
+    }
+
+    .name {
+      white-space: nowrap;
+      color: #ad285b;
+      text-shadow: 3px 4px #fff9ed;
+    }
+
+    .name span {
+      display: inline-block;
+    }
+
+    .name span:nth-child(2) {
+      color: #386450;
+      transform: rotate(4deg);
+    }
+
+    .name span:nth-child(3) {
+      color: #8a421e;
+      transform: rotate(-5deg);
+    }
+
+    .name span:nth-child(4) {
+      color: #674983;
+    }
+
+    .age-line {
+      display: block;
+      color: var(--ink);
+      font-size: .38em;
+      letter-spacing: -.015em;
+      margin-top: .24em;
+    }
+
+    .hero-copy .intro {
+      max-width: 33ch;
+      margin-bottom: 22px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .link,
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 49px;
+      padding: 12px 21px;
+      border-radius: 100px;
+      border: 2px solid transparent;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--rose);
+      color: white;
+      box-shadow: 0 4px #67223e;
+    }
+
+    .primary:hover {
+      background: #832047;
+    }
+
+    .secondary {
+      background: #fffaed;
+      border-color: #365743;
+      color: #304c39;
+      box-shadow: 0 4px #365743;
+    }
+
+    .secondary:hover {
+      background: #ecf3df;
+    }
+
+    .scene {
+      position: relative;
+      display: grid;
+      align-items: center;
+      isolation: isolate;
+      min-height: 300px;
+      aspect-ratio: 1.25;
+    }
+
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: 1% 7% 3%;
+      z-index: -1;
+      border: 6px solid #fff9e9;
+      border-radius: 48% 48% 35% 35%;
+      background: #ffbcd3;
+      box-shadow: 7px 8px #bb6a5536;
+      transform: rotate(5deg);
+    }
+
+    .art {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 5px 0 #fff9ed);
+    }
+
+    .bunting {
+      position: absolute;
+      z-index: 2;
+      top: -15px;
+      left: 50%;
+      width: min(680px, 105%);
+      height: 61px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      display: flex;
+      justify-content: space-evenly;
+      border-bottom: 3px solid #874e37;
+      border-radius: 50%;
+    }
+
+    .bunting i {
+      width: clamp(22px, 5vw, 46px);
+      height: clamp(27px, 6vw, 52px);
+      align-self: end;
+      transform: translateY(60%) rotate(var(--turn, 0deg));
+      background: var(--color);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      text-shadow: 3px 3px #fff9ed;
+      pointer-events: none;
+    }
+
+    .star {
+      left: 8%;
+      top: 10%;
+      color: #8a4c91;
+      transform: rotate(-15deg);
+    }
+
+    .flower {
+      right: 6%;
+      bottom: 12%;
+      color: #9a2855;
+      transform: rotate(15deg);
+    }
+
+    .spark {
+      left: 9%;
+      bottom: 13%;
+      color: #39765e;
+    }
+
+    .balloon {
+      position: absolute;
+      top: 1%;
+      right: 7%;
+      width: 13%;
+      aspect-ratio: .77;
+      border-radius: 48% 52% 49% 50%;
+      background: radial-gradient(ellipse at 28% 22%, #fff7 0 9%, transparent 12%), #879ee3;
+      transform-origin: 50% 100%;
+      animation: float 4s ease-in-out infinite;
+      box-shadow: inset -5px -4px #464b7650;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      top: 98%;
+      left: 50%;
+      height: 58%;
+      width: 28%;
+      border-left: 2px solid #514273;
+      border-radius: 50%;
+    }
+
+    .balloon.small {
+      right: 1%;
+      top: 13%;
+      width: 10%;
+      background-color: #ed7b9d;
+      animation-delay: -1.4s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-8deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(6deg);
+      }
+    }
+
+    .details {
+      max-width: 920px;
+      margin: auto;
+      padding: clamp(50px, 8vw, 94px) 24px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      letter-spacing: -.033em;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .ticket {
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 12px;
+      border-radius: 32px;
+      padding: 28px 14px 33px;
+      border: 2px dashed #d63c84;
+      background: #ffa2d5;
+    }
+
+    .ticket.place {
+      background: #e2edcd;
+      border-color: #567058;
+    }
+
+    .ticket strong {
+      font: 600 clamp(1.65rem, 4vw, 2.45rem)/1.05 var(--display);
+    }
+
+    .ticket .day {
+      display: block;
+      font: 700 4.5rem/.9 var(--display);
+      color: var(--rose);
+    }
+
+    .ticket .date {
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+    }
+
+    .ticket .place-icon {
+      font: 600 2rem/1 var(--display);
+      color: #3e694d;
+    }
+
+    .rsvp {
+      text-align: center;
+      padding: 63px 24px 54px;
+      background-color: #eedfff;
+      background-image: radial-gradient(#b69bc480 1.4px, transparent 1.5px);
+      background-size: 19px 19px;
+      border-top: 7px solid #fff;
+    }
+
+    .rsvp p {
+      margin: 14px auto 20px;
+      max-width: 35ch;
+    }
+
+    .rsvp .closing {
+      margin-bottom: 0;
+    }
+
+    .rsvp .demo {
+      margin: 18px auto 0;
+      font-size: .8rem;
+    }
+
+    .party-button {
+      margin: 14px 0 0;
+      background: #fff9e9;
+      color: #732850;
+      border-color: #a45e83;
+    }
+
+    .party-button:hover {
+      background: #ffe2a3;
+    }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    #confetti i {
+      position: absolute;
+      top: -24px;
+      left: var(--x);
+      width: 9px;
+      height: 15px;
+      border-radius: 4px;
+      background: var(--color);
+      animation: fall var(--time) var(--delay) ease-in both;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translate(var(--drift), 110vh) rotate(680deg);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        padding-top: 75px;
+        padding-bottom: 39px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .hero-copy .intro {
+        margin-inline: auto;
+      }
+
+      h1 {
+        font-size: clamp(4.6rem, 17vw, 7rem);
+      }
+
+      .scene {
+        width: min(100%, 440px);
+        min-height: 0;
+        margin: auto;
+      }
+
+      .scene::before {
+        margin: 2px;
+        border-width: 4px;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .balloon,
+      #confetti i {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="hero">
+      <div class="bunting" aria-hidden="true">
+        <i style="--color:#eb789f;--turn:27deg"></i><i style="--color:#88a8df;--turn:18deg"></i>
+        <i style="--color:#9bc38b;--turn:9deg"></i><i style="--color:#d38cef"></i>
+        <i style="--color:#eb789f;--turn:-9deg"></i><i style="--color:#88a8df;--turn:-18deg"></i>
+        <i style="--color:#9bc38b;--turn:-27deg"></i>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p>¡Te invito a mi cumple!</p>
+          <h1><span class="name" aria-label="Lucía"><span aria-hidden="true">L</span><span
+                aria-hidden="true">u</span><span aria-hidden="true">c</span><span aria-hidden="true">í</span><span
+                aria-hidden="true">a</span></span><span class="age-line">¡cumplo 6!</span></h1>
+          <p class="intro">Vení a festejar conmigo una tarde de juegos, torta y capibaras.</p>
+          <a class="link primary" href="#fiesta">Ver datos de la fiesta <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="scene">
+          <span class="sticker star" aria-hidden="true">✦</span><span class="sticker flower" aria-hidden="true">✿</span>
+          <span class="sticker spark" aria-hidden="true">✧</span>
+          <span class="balloon" aria-hidden="true"></span><span class="balloon small" aria-hidden="true"></span>
+          <svg class="art" viewBox="0 0 490 320" role="img"
+            aria-label="Capibara sonriente con sombrero de fiesta, un pequeño capibara y flores"
+            xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="245" cy="286" rx="195" ry="25" fill="#e8edda" />
+            <circle cx="74" cy="105" r="5" fill="#edb6c8" />
+            <circle cx="410" cy="94" r="5" fill="#e8b872" />
+            <circle cx="367" cy="42" r="4" fill="#a7cba2" />
+            <path d="M46 208q12-25 24 0-12-6-24 0M418 222q12-25 24 0-12-6-24 0" fill="#9dc39d" />
+            <g fill="#f5adc3">
+              <circle cx="61" cy="219" r="8" />
+              <circle cx="77" cy="219" r="8" />
+              <circle cx="69" cy="211" r="8" />
+              <circle cx="69" cy="227" r="8" />
+            </g>
+            <circle cx="69" cy="219" r="5" fill="#ffd973" />
+            <g fill="#ffd49a">
+              <circle cx="426" cy="229" r="7" />
+              <circle cx="440" cy="229" r="7" />
+              <circle cx="433" cy="221" r="7" />
+              <circle cx="433" cy="237" r="7" />
+            </g>
+            <circle cx="433" cy="229" r="4" fill="#f29a9b" />
+            <path d="M128 199c0-70 46-116 121-116 84 0 137 47 137 119v45H128z" fill="#b98361" />
+            <ellipse cx="249" cy="243" rx="140" ry="46" fill="#b98361" />
+            <path d="M154 132q-23-20-29-3-7 18 13 29M336 130q23-22 31-4 7 19-16 31" fill="#9b674c" stroke="#87583e"
+              stroke-width="5" stroke-linejoin="round" />
+            <ellipse cx="247" cy="173" rx="111" ry="89" fill="#c5906b" />
+            <ellipse cx="246" cy="207" rx="69" ry="41" fill="#d8a781" />
+            <circle cx="205" cy="165" r="6" fill="#42362f" />
+            <circle cx="287" cy="165" r="6" fill="#42362f" />
+            <ellipse cx="183" cy="190" rx="15" ry="8" fill="#e7a394" opacity=".8" />
+            <ellipse cx="311" cy="190" rx="15" ry="8" fill="#e7a394" opacity=".8" />
+            <ellipse cx="246" cy="193" rx="13" ry="9" fill="#624535" />
+            <path d="M246 201v8m0 0q-11 14-23 1m23-1q11 14 23 1" fill="none" stroke="#624535" stroke-width="4"
+              stroke-linecap="round" />
+            <path d="M205 88l37-77 44 78z" fill="#ef91ac" />
+            <path d="M225 47l41 1M212 72l66 1" stroke="#ffe2a5" stroke-width="9" />
+            <circle cx="243" cy="12" r="9" fill="#ffd377" />
+            <path d="M152 248q-17 0-17 18m205-18q17 0 17 18" stroke="#956b51" stroke-width="15"
+              stroke-linecap="round" />
+            <g transform="translate(348 215) scale(.68)">
+              <ellipse cx="42" cy="70" rx="69" ry="43" fill="#a97558" />
+              <circle cx="30" cy="36" r="50" fill="#bb8968" />
+              <ellipse cx="-5" cy="1" rx="12" ry="17" fill="#94684c" />
+              <ellipse cx="63" cy="1" rx="12" ry="17" fill="#94684c" />
+              <ellipse cx="29" cy="52" rx="31" ry="20" fill="#d3a17c" />
+              <circle cx="10" cy="30" r="4" fill="#3f342c" />
+              <circle cx="49" cy="30" r="4" fill="#3f342c" />
+              <ellipse cx="30" cy="46" rx="8" ry="5" fill="#624535" />
+              <path d="M30 51q-7 9-14 1m14-1q7 9 14 1" fill="none" stroke="#624535" stroke-width="3"
+                stroke-linecap="round" />
+              <path d="M5-11L28-58 50-11z" fill="#a9cda4" />
+              <circle cx="28" cy="-58" r="7" fill="#ffd377" />
+            </g>
+            <path d="M91 89l-6-14m28 6 9-12m263 91 11-11m-5 29 17 2" stroke="#edb1be" stroke-width="5"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+    </header>
+    <section class="details" id="fiesta" aria-labelledby="fiesta-title">
+      <h2 id="fiesta-title">¡Nos vemos en la fiesta!</h2>
+      <div class="event-grid">
+        <div class="ticket">
+          <time class="date" datetime="2026-12-12">
+            <span>Sábado</span><span class="day">12</span><strong>Diciembre de 2026</strong>
+          </time>
+          <p>De 16:00 a 19:00 h</p>
+        </div>
+        <div class="ticket place">
+          <span class="place-icon" aria-hidden="true">✿</span>
+          <strong>Shopping del Lago</strong>
+          <p>Ciudad del Este, Alto Paraná</p>
+          <a class="link secondary"
+            href="https://www.google.com/maps/search/?api=1&amp;query=Shopping%20del%20Lago%2C%20Ciudad%20del%20Este%2C%20Paraguay"
+            target="_blank" rel="noopener noreferrer">Ver ubicación <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="rsvp" aria-labelledby="rsvp-title">
+      <h2 id="rsvp-title">¿Venís a festejar?</h2>
+      <p>Avisanos hasta el <strong><time datetime="2026-12-09">miércoles 9 de diciembre</time></strong>.</p>
+      <a class="link primary"
+        href="https://wa.me/595993322204?text=%C2%A1Hola%2C%20Sof%C3%ADa%21%20Te%20escribo%20para%20confirmar%20mi%20asistencia%20al%20cumple%20de%20Luc%C3%ADa.%20Mi%20nombre%20es%20___%20y%20vamos%20a%20ir%20___%20personas."
+        target="_blank" rel="noopener noreferrer">Confirmar por WhatsApp <span aria-hidden="true">↗</span></a>
+      <p class="closing">¡Te espero para soplar las velitas conmigo!<br>Con cariño, Lucía</p>
+      <button class="party-button" id="party" type="button" hidden>¡Lanzá confeti! <span
+          aria-hidden="true">✦</span></button>
+      <p class="demo">Invitación de muestra</p>
+    </section>
+  </main>
+  <div id="confetti" aria-hidden="true"></div>
+  <script>
+    const party = document.querySelector('#party');
+    const confetti = document.querySelector('#confetti');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const colors = ['#e76397', '#eab542', '#82ab70', '#7d90de', '#ad6cc5'];
+
+    party.hidden = motion.matches;
+    motion.addEventListener('change', () => {
+      party.hidden = motion.matches;
+      confetti.replaceChildren();
+    });
+    party.addEventListener('click', () => {
+      const pieces = document.createDocumentFragment();
+      for (let index = 0; index < 44; index += 1) {
+        const piece = document.createElement('i');
+        piece.style.setProperty('--x', Math.random() * 100 + '%');
+        piece.style.setProperty('--drift', (Math.random() - .5) * 220 + 'px');
+        piece.style.setProperty('--delay', Math.random() * .45 + 's');
+        piece.style.setProperty('--time', 1.1 + Math.random() * .8 + 's');
+        piece.style.setProperty('--color', colors[index % colors.length]);
+        piece.addEventListener('animationend', () => piece.remove(), {once: true});
+        pieces.append(piece);
+      }
+      confetti.replaceChildren(pieces);
+    });
+  </script>
+</body>
+
+</html>
